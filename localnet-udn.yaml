@@ -1,0 +1,15 @@
+apiVersion: k8s.ovn.org/v1
+kind: ClusterUserDefinedNetwork
+metadata:
+  name: localnet-udn
+spec:
+  namespaceSelector:
+    matchLabels:
+      network: localnet
+  network:
+    localnet:
+      ipam:
+        mode: Disabled
+      role: Secondary
+      physicalNetworkName: vm-net
+    topology: Localnet

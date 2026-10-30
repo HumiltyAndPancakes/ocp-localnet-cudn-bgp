@@ -1,0 +1,32 @@
+apiVersion: frrk8s.metallb.io/v1beta1
+kind: FRRConfiguration
+metadata:
+  name: localnet-advertisement
+  namespace: openshift-frr-k8s
+spec:
+  bgp:
+    routers:
+    - asn: <CLUSTER_ASN>
+      neighbors:
+      - address: "<PEER_IP1>"
+        asn: <PEER_ASN>
+        disableMP: false
+        dualStackAddressFamily: false
+        holdTime: 90s
+        keepaliveTime: 30s
+        toAdvertise:
+          allowed:
+            prefixes:
+            - <UDN_SUBNET>
+      - address: "<PEER_IP2>"
+        asn: <PEER_ASN>
+        disableMP: false
+        dualStackAddressFamily: false
+        holdTime: 90s
+        keepaliveTime: 30s
+        toAdvertise:
+          allowed:
+            prefixes:
+            - <UDN_SUBNET>
+      prefixes:
+      - <UDN_SUBNET>
